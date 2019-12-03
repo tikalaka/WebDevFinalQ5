@@ -22,3 +22,26 @@ const UserSchema = new User({
     q3: Number,
     q4: Number,
 });
+
+
+const router = express.Router();
+
+const user = mongoose.model("users", UserSchema);
+
+router.route("/").get(
+    function(req,res){
+        res.render("index");
+    }
+);
+
+router.route("/registration").get(
+    function(req,res){
+        res.render("registration");
+    }
+);
+
+router.route().get(
+    function(req,res){
+        
+    }
+)
