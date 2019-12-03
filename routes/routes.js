@@ -11,7 +11,7 @@ mongoose.connect(fullUrl, {
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const UserSchema = new User({
+const UserSchema = new Schema({
     _id: Number,
     role: String, //admin or user
     username: String,
@@ -45,3 +45,5 @@ router.route().get(
         
     }
 )
+
+module.exports = router;
