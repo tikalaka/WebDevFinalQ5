@@ -4,7 +4,7 @@ html
     body
         nav(class='navBar')
         h1="Register an account!"
-        form(action='/Register', type='Post' )
+        form(action='/registration', type='Post' )
             div
                 label="Full name"
                 input(type='text', name='fullName')
@@ -21,9 +21,65 @@ html
                 label='Password'
                 input(type='password', name='password')
             input(type="submit", value="Register account!")
-        form(class='multipleChoice', action='/Register', type='Post')
+        form(class='multipleChoice', action='/registration', type='Post')
             div
-                label="Choose 1"
-                input(type='radio', name='question1', value='Yes' checked)
-                input(type='radio', name='question1', value='No' )
-                input(type='radio', name='question1', value='Maybe' )
+                div
+                    span="What is the best color of these options?"
+                    br
+                    div
+                        input(type='radio', name='question1', value='Yellow' checked)
+                        label='Yellow'
+                        br
+                    div
+                        input(type='radio', name='question1', value='Red' )
+                        label='Red'
+                        br
+                    div
+                        input(type='radio', name='question1', value='Blue' )
+                        label='Blue'
+                        br
+                    div
+                        input(type='radio', name='question1', value='Green' )
+                        label='Green'
+                        br
+            div
+                div
+                    span='What do you think of the new Tesla truck?'
+                    br
+                    div
+                        input(type='radio', name='question2', value='Love it!' checked)
+                        label='Love it!'
+                        br
+                    div
+                        input(type='radio', name='question2', value='Hate it!' )
+                        label='Hate it!'
+                        br
+                    div
+                        input(type='radio', name='question2', value='Triangle' )
+                        label='Triangle'
+                        br
+                    div
+                        input(type='radio', name='question2', value='Not sure' )
+                        label='Not sure'
+                        br
+            div
+                div
+                    span='What is your favorite food?'
+                    br
+                    div
+                        input(type='radio', name='question3', value='Pizza' checked)
+                        label='Pizza'
+                        br
+                    div
+                        input(type='radio', name='question3', value='Hamburger' )
+                        label='Hamburger'
+                        br
+                    div
+                        input(type='radio', name='question3', value='Chicken' )
+                        label='Chicken'
+                        br
+                    div
+                        input(type='radio', name='question3', value='Salad' )
+                        label='Salad'
+                        br
+            
