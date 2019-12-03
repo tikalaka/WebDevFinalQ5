@@ -14,7 +14,7 @@ mongoose.connect(fullUrl, {
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const UserSchema = new User({
+const UserSchema = new Schema({
     _id: ObjectId,
     role: String, //admin or user
     username: String,
