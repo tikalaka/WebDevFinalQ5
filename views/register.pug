@@ -1,0 +1,18 @@
+html
+    head
+        link(href='css/style.css', rel='stylesheet', type='text/css')
+    body
+        nav(class='navBar')
+        h1="Register an account!"
+
+        form(action='/Register', type='Post' )
+            div
+                label="Full name"
+                input(type='text', name='fullName')
+            div
+                label="Username"
+                input(type='text', name='username')
+            div
+                label='Password'
+                input(type='password', name='password')
+            input(type="submit", value="Register account!")
