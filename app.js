@@ -5,10 +5,10 @@ let port = 3000;
 
 const app = express();
 
-app.use(session({
-    secret: 'stinky',
-    cookie: {}
-}))
+// app.use(session({
+//     secret: 'stinky',  NOT SURE WHAT THIS IS
+//     cookie: {}
+// }))
 
 
 app.set("view engine", "pug");
