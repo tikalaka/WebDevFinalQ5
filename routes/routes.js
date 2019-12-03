@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
-var fullUrl = 'mongodb+srv://DanAndLuis:DanAndLuis@interactivewebdevfinal-8z02v.mongodb.net/InteractiveWebDevFinal?retryWrites=true&w=majority';
+var fullUrl = 'mongodb+srv://DanAndLuis:DanAndLuis@interactivewebdevfinal-8z02v.mongodb.net/InteractiveUserDatabase?retryWrites=true&w=majority';
 
 mongoose.connect(fullUrl, {
     useNewUrlParser: true,
@@ -97,7 +97,7 @@ router.route("/login").post(
             username: req.body.username,
             password: req.body.password,
         }
-        user.findOne({'username': item.username},function(err, userObj){
+        await user.findOne({username: item.username},function(err, userObj){
             console.log("--------")
             console.log(userObj.username)
             console.log(userObj.role)
