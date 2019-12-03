@@ -96,3 +96,5 @@ router.route("/").get(
 
     }
 )
+
+module.exports = router;
