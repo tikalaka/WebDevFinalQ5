@@ -1,0 +1,20 @@
+html
+    head
+        title='Login to your account'
+        link(href='css/style.css', rel='stylesheet', type='css/text')
+    body
+        nav(class='navBar')
+            
+        h1="Login into your account!"
+        if(message)
+            div(class="error")
+                h1=message
+        form(action="/login", method="Post")
+            div
+                label="Username"
+                input(type="text", name="username")
+            div
+                label="Password"
+                input(type="password", name="password")
+            input(type="submit", value="Login")
+        a(href='/Register')='Register an account'

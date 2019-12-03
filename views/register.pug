@@ -1,0 +1,29 @@
+html
+    head
+        link(href='css/style.css', rel='stylesheet', type='text/css')
+    body
+        nav(class='navBar')
+        h1="Register an account!"
+        form(action='/Register', type='Post' )
+            div
+                label="Full name"
+                input(type='text', name='fullName')
+            div
+                label="Username"
+                input(type='text', name='username')
+            div
+                label='Email'
+                input(type='email', name='email')
+            div
+                label='Age'
+                input(type='number', name='age')
+            div
+                label='Password'
+                input(type='password', name='password')
+            input(type="submit", value="Register account!")
+        form(class='multipleChoice', action='/Register', type='Post')
+            div
+                label="Choose 1"
+                input(type='radio', name='question1', value='Yes' checked)
+                input(type='radio', name='question1', value='No' )
+                input(type='radio', name='question1', value='Maybe' )

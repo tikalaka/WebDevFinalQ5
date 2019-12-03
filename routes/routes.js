@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-var fullUrl = 'DATABSE URL HERE';
+var fullUrl = 'mongodb+srv://DanAndLuis:DanAndLuis@interactivewebdevfinal-8z02v.mongodb.net/InteractiveWebDevFinal?retryWrites=true&w=majority';
 
 mongoose.connect(fullUrl, {
     useNewUrlParser: true,
@@ -25,8 +25,9 @@ const UserSchema = new User({
     q1: Number,
     q2: Number,
     q3: Number,
-    q4: Number
+    q4: Number,
 });
+
 
 const router = express.Router();
 
