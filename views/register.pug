@@ -4,7 +4,6 @@ html
     body
         nav(class='navBar')
         h1="Register an account!"
-
         form(action='/Register', type='Post' )
             div
                 label="Full name"
@@ -13,6 +12,14 @@ html
                 label="Username"
                 input(type='text', name='username')
             div
+                label='Email'
+                input(type='email', name='email')
+            div
+                label='Age'
+                input(type='number', name='age')
+            div
                 label='Password'
                 input(type='password', name='password')
             input(type="submit", value="Register account!")
+        form(class='multipleChoice', action='/Register', type='Post')
+            
