@@ -25,7 +25,7 @@ const UserSchema = new Schema({
     q1: Number,
     q2: Number,
     q3: Number,
-    q4: Number,
+
 },{collection:"users"});
 
 
@@ -63,7 +63,6 @@ router.route("/registration").post(
             q1: req.body.q1,
             q2: req.body.q2,
             q3: req.body.q3,
-            q4: req.body.q4
         }
         console.log(item);
         bcrypt.hash(item.password, 10, async function(err, hash) {
