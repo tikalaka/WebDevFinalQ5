@@ -62,8 +62,7 @@ router.route("/registration").post(
             age: req.body.age,
             q1: req.body.q1,
             q2: req.body.q2,
-            q3: req.body.q3,
-            q4: req.body.q4
+            q3: req.body.q3
         }
         console.log(item);
         bcrypt.hash(item.password, 10, async function(err, hash) {
@@ -91,10 +90,55 @@ router.route("/registration").post(
     }
 );
 
-router.route("/").get(
-    function(req,res){
-
+router.route("/login").post(
+    async function(req,res){
+        console.log(req.body);
+        var item = {
+            username: req.body.username,
+            password: req.body.password,
+        }
+        user.findOne({'username': item.username},function(err, userObj){
+            console.log("--------")
+            console.log(userObj.username)
+            console.log(userObj.role)
+            console.log("--------")
+            var matches = bcrypt.compare(item.password, userObj.password);
+            if(matches){
+                console.log("login comlpete!")
+                req.session.username = userObj.username;
+                req.session.role = userObj.role;
+                console.log(req.session.role);
+                res.redirect("/home")
+            }
+            else{
+                console.log("login failed")
+                res.redirect("/login")
+            }
+        })
     }
 )
+
+router.route("/home").get(
+    function(req,res){
+        var model = {
+
+        }
+        res.render("home",model);
+    }
+);
+
+router.route("/admin").get(
+    function(req,res){
+        var model={
+            role: req.session.role
+        }
+        if(model.role == "admin"){
+            res.render("admin", model);
+        }
+        else{
+            res.redirect("login");
+        }
+    }
+);
 
 module.exports = router;
