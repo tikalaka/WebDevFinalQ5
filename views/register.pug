@@ -22,4 +22,8 @@ html
                 input(type='password', name='password')
             input(type="submit", value="Register account!")
         form(class='multipleChoice', action='/Register', type='Post')
-            
+            div
+                label="Choose 1"
+                input(type='radio', name='question1', value='Yes' checked)
+                input(type='radio', name='question1', value='No' )
+                input(type='radio', name='question1', value='Maybe' )
