@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
 var fullUrl = 'mongodb+srv://DanAndLuis:DanAndLuis@interactivewebdevfinal-8z02v.mongodb.net/InteractiveWebDevFinal?retryWrites=true&w=majority';
@@ -15,7 +15,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const UserSchema = new User({
-    _id: Number,
+    _id: ObjectId,
     role: String, //admin or user
     username: String,
     fullname: String,
@@ -26,7 +26,7 @@ const UserSchema = new User({
     q2: Number,
     q3: Number,
     q4: Number,
-});
+},{collection:"users"});
 
 
 const router = express.Router();
