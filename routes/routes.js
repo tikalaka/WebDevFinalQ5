@@ -22,9 +22,9 @@ const UserSchema = new Schema({
     password: String,
     email: String,
     age: Number,
-    q1: Number,
-    q2: Number,
-    q3: Number,
+    q1: String,
+    q2: String,
+    q3: String
 
 },{collection:"users"});
 
@@ -41,16 +41,14 @@ router.route("/").get(
 
 router.route("/register").get(
     function(req,res){
-        var model = {
-            role: req.session.role
-        }
-        res.render("register", model);
+        console.log("SENDING TO ADD USER");
+        res.render("register");
     }
 )
 
-router.route("/registration").post(
+router.route("/register").post(
     async function(req,res){
-        //create user
+        console.log("ADDING USER I HOPE X3")
         var model = {
             role: req.session.role
         }
@@ -60,9 +58,9 @@ router.route("/registration").post(
             password: req.body.password,
             email: req.body.email,
             age: req.body.age,
-            q1: req.body.q1,
-            q2: req.body.q2,
-            q3: req.body.q3
+            q1: req.body.question1,
+            q2: req.body.question2,
+            q3: req.body.question3
         }
         console.log(item);
         bcrypt.hash(item.password, 10, async function(err, hash) {
@@ -78,7 +76,10 @@ router.route("/registration").post(
                     username: item.username,
                     password: hash,
                     email: item.email,
-                    role: "user"
+                    role: "user",
+                    q1: item.q1,
+                    q2: item.q2,
+                    q3: item.q3
                 })
                 await newItemInsert.save(function (err) {
                     if (err) return handleError(err);
@@ -86,7 +87,7 @@ router.route("/registration").post(
                 });
             };
         },
-        res.redirect("/login",model));
+        res.redirect("/"));
     }
 );
 
@@ -121,7 +122,7 @@ router.route("/login").post(
 router.route("/home").get(
     function(req,res){
         var model = {
-
+            role: req.session.role
         }
         res.render("home",model);
     }

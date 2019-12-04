@@ -4,10 +4,10 @@ html
     body
         nav(class='navBar')
         h1="Register an account!"
-        form(action='/registration', type='Post' )
+        form(action='/register', method='POST')
             div
                 label="Full name"
-                input(type='text', name='fullName')
+                input(type='text', name='fullname')
             div
                 label="Username"
                 input(type='text', name='username')
@@ -20,8 +20,6 @@ html
             div
                 label='Password'
                 input(type='password', name='password')
-            input(type="submit", value="Register account!")
-        form(class='multipleChoice', action='/registration', type='Post')
             div
                 div
                     span="What is the best color of these options?"
@@ -82,4 +80,4 @@ html
                         input(type='radio', name='question3', value='Salad' )
                         label='Salad'
                         br
-            
+            input(type="submit", value="Register account!")
