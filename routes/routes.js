@@ -140,8 +140,8 @@ router.route("/admin").get(
         if(model.role == "admin"){
             res.render("admin", model);
         }
-        else{
-            res.redirect("login");
+        else {
+            res.redirect("/");
         }
     }
 );
