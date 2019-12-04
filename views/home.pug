@@ -2,11 +2,18 @@ html
     head
         title="Home Page"
         link(href='/css/style.css', rel='stylesheet', type='text/css')
+        script(src='/public/js/chartsController.js')
     body
         nav(class='navBar')
             a(href="/" id="menuItem")="Login"
             if role == "admin"
                 a(id="menuItem" href="/admin") Admin Page
-            
-
-
+        div(class="allCharts")
+            div(class="charts1&2")
+                span(class="chart1")
+                    canvas(id="userChart1" width="400" height="400")
+                span(class="chart2")
+                    canvas(id="userChart2" width="400" height="400")
+                span(class="chart3")
+                    canvas(id="userChart3" width="400" height="400")
+        

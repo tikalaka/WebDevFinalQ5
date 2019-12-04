@@ -103,21 +103,30 @@ router.route("/login").post(
             password: req.body.password,
         }
         await user.findOne({username: item.username},function(err, userObj){
-            console.log("--------")
-            console.log(userObj.username)
-            console.log(userObj.role)
-            console.log("--------")
-            var matches = bcrypt.compare(item.password, userObj.password);
-            if(matches){
-                console.log("login comlpete!")
-                req.session.username = userObj.username;
-                req.session.role = userObj.role;
-                console.log(req.session.role);
-                res.redirect("/home")
+            if(userObj != null){
+                console.log("--------")
+                console.log(userObj.username)
+                console.log(userObj.role)
+                console.log("--------")
+                var matches = bcrypt.compare(item.password, userObj.password);
+                if(matches){
+                    console.log("login comlpete!")
+                    req.session.username = userObj.username;
+                    req.session.role = userObj.role;
+                    console.log(req.session.role);
+                    res.redirect("/home")
+                }
+                else{
+                    console.log("login failed")
+                    res.redirect("/")
+                }
             }
             else{
-                console.log("login failed")
-                res.redirect("/login")
+                console.log("Username Does Not Exist")
+                model={
+                    message:"User Does Not Exist"
+                }
+                res.render("index",model);
             }
         })
     }
@@ -125,6 +134,9 @@ router.route("/login").post(
 
 router.route("/home").get(
     function(req,res){
+        
+
+
         var model = {
             role: req.session.role
         }
