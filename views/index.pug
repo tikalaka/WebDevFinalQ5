@@ -6,7 +6,7 @@ html
         nav(class='navBar')
             
         h1="Login into your account!"
-        if(model.message)
+        if(message)
             div(class="error")
                 p=model.message
         form(action="/login", method="POST")
