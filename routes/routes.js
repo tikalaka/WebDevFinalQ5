@@ -42,6 +42,9 @@ router.route("/").get(
 router.route("/register").get(
     function(req,res){
         console.log("SENDING TO ADD USER");
+        // var model = {
+        //     role: req.session.role
+        // }
         res.render("register");
     }
 )
@@ -49,6 +52,7 @@ router.route("/register").get(
 router.route("/register").post(
     async function(req,res){
         console.log("ADDING USER I HOPE X3")
+        console.log(req.body)
         var model = {
             role: req.session.role
         }
