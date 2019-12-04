@@ -8,8 +8,8 @@ var fullUrl = 'mongodb+srv://DanAndLuis:DanAndLuis@interactivewebdevfinal-8z02v.
 mongoose.connect(fullUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-}).then(()=> console.log("Connected To Database"))
-    .catch(err => {console.log(Error, err.message)});
+}).then(() => console.log("Connected To Database"))
+    .catch(err => { console.log(Error, err.message) });
 
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
@@ -27,7 +27,7 @@ const UserSchema = new Schema({
     q2: String,
     q3: String
 
-},{collection:"users"});
+}, { collection: "users" });
 
 
 const router = express.Router();
@@ -35,13 +35,13 @@ const router = express.Router();
 const user = mongoose.model("users", UserSchema);
 
 router.route("/").get(
-    function(req,res){
+    function (req, res) {
         res.render("index");
     }
 );
 
 router.route("/register").get(
-    function(req,res){
+    function (req, res) {
         console.log("SENDING TO ADD USER");
         // var model = {
         //     role: req.session.role
@@ -51,7 +51,7 @@ router.route("/register").get(
 )
 
 router.route("/register").post(
-    async function(req,res){
+    async function (req, res) {
         console.log("ADDING USER I HOPE X3")
         console.log(req.body)
         var model = {
@@ -69,12 +69,12 @@ router.route("/register").post(
             q3: req.body.question3
         }
         console.log(item);
-        bcrypt.hash(item.password, 10, async function(err, hash) {
+        bcrypt.hash(item.password, 10, async function (err, hash) {
             console.log("--hash--")
             console.log(hash)
             console.log("-------")
             console.log(item.password)
-            if(item){
+            if (item) {
                 console.log("Making a User, i hope");
                 var newItemInsert = new user({
                     _id: mongoose.Types.ObjectId(),
@@ -95,71 +95,70 @@ router.route("/register").post(
                 });
             };
         },
-        res.redirect("/"));
+            res.redirect("/"));
     }
 );
 // TO-DO: Suspended accounts should not be able to login and should get a message when they try (or redirect to another page)
 router.route("/login").post(
-    async function(req,res){
+    async function (req, res) {
         console.log(req.body);
         var item = {
             username: req.body.username,
             password: req.body.password,
         }
-        await user.findOne({username: item.username},function(err, userObj){
-            if(userObj != null){
+        await user.findOne({ username: item.username }, function (err, userObj) {
+            if (userObj != null) {
                 console.log("--------")
                 console.log(userObj.username)
                 console.log(userObj.role)
                 console.log("--------")
                 var matches = bcrypt.compare(item.password, userObj.password);
-                if(matches){
+                if (matches) {
                     console.log("login comlpete!")
                     req.session.username = userObj.username;
                     req.session.role = userObj.role;
+                    req.session._id = userObj._id;
                     console.log(req.session.role);
                     res.redirect("/home")
                 }
-                else{
+                else {
                     console.log("Password is incorrect")
-                    model={
-                        message:"User/Password Incorrect"
+                    model = {
+                        message: "User/Password Incorrect"
                     }
-                    res.render("index",model);
+                    res.render("index", model);
                 }
             }
-            else{
+            else {
                 console.log("Username Does Not Exist")
-                model={
-                    message:"User/Password Incorrect"
+                model = {
+                    message: "User/Password Incorrect"
                 }
-                res.render("index",model);
+                res.render("index", model);
             }
         })
     }
 )
 
 router.route("/home").get(
-    function(req,res){
-        
-
-
+    function (req, res) {
         var model = {
             role: req.session.role
         }
-        res.render("home",model);
+        res.render("home", model);
     }
 );
 
 router.route("/admin").get(
-    async function(req,res){
+    async function (req, res) {
         usersFromDb = await user.find()
 
-        var model={
+        var model = {
+            adminId : req.session._id,
             role: req.session.role,
-            users : usersFromDb
+            users: usersFromDb
         }
-        if(model.role == "admin"){
+        if (model.role == "admin") {
             res.render("admin", model);
         }
         else {
@@ -167,5 +166,21 @@ router.route("/admin").get(
         }
     }
 );
+router.route("/admin/:userId").get(
+    async function (req, res) {
+        var userId = req.params.userId;
+        var oldUser = await user.findOne({ _id: userId })
+        if (oldUser) {
+            if (oldUser.role == 'admin') {
+                await user.updateOne({ _id: userId }, { $set: { role: "user" } })
+            } else if (oldUser.role == 'user') {
+                await user.updateOne({ _id: userId }, { $set: { role: "admin" } })
+            }
+            res.redirect("/admin")
+        } else {
+            res.send("We couldn't find a user with id: " + userId)
+        }
+    }
+)
 
 module.exports = router;

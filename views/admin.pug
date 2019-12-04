@@ -18,11 +18,14 @@ html
                     td=user.username
                     td=user.email
                     if user.role == 'admin'
-                        td=user.role
-                            a(href="https://www.google.com")='   Demote'
+                        if user._id == adminId
+                            td=user.role + "(You)"
+                        else 
+                            td=user.role
+                                a(href="/admin/" + user._id)='   Demote'
                     else
                         td=user.role
-                            a(href="https://www.google.com")='   Promote'
+                            a(href="/admin/" + user._id)='   Promote'
                     td=user.age
                     td=user.status
 //- that shows a table listing all of the users, their user information and current status (active,  suspended.)
