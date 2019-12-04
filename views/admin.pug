@@ -3,3 +3,26 @@ html
         link(href='css/style.css', rel='stylesheet', type='text/css')
     body
         h1='Welcome to the admin page!'
+        table
+            caption="Users in database"
+            tr(style='width:100%')
+                th='Fullname'
+                th='Username'
+                th='Email'
+                th='Role'
+                th='Age'
+                th='Status'
+            for user in users
+                tr
+                    th=user.fullname
+                    th=user.username
+                    th=user.email
+                    th=user.role
+                    th=user.age
+                    th=user.status
+
+//- that shows a table listing all of the users, their user information and current status (active,  suspended.)
+//- Each user should have a promote or demote link. Clicking promote will make a regular user an admin,
+//- and clicking demote will make an admin user a regular user. The currently logged in admin should NOT be able to demote themselves.
+//- Give the admin user the ability to suspend/activate user accounts. 
+//- Suspended accounts should not be able to login and should get a message when they try (or redirect to another page)
