@@ -17,7 +17,10 @@ html
                     th=user.fullname
                     th=user.username
                     th=user.email
-                    th=user.role
+                    if user.role == 'admin'
+                        th=user.role
+                    else
+                        th(href="https://www.google.com")=user.role
                     th=user.age
                     th=user.status
 
