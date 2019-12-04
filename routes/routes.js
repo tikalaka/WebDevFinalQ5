@@ -22,6 +22,7 @@ const UserSchema = new Schema({
     password: String,
     email: String,
     age: Number,
+    status: String,
     q1: String,
     q2: String,
     q3: String
@@ -62,6 +63,7 @@ router.route("/register").post(
             password: req.body.password,
             email: req.body.email,
             age: req.body.age,
+            status: "Active",
             q1: req.body.question1,
             q2: req.body.question2,
             q3: req.body.question3
@@ -80,6 +82,8 @@ router.route("/register").post(
                     username: item.username,
                     password: hash,
                     email: item.email,
+                    age: item.age,
+                    status: "Active",
                     role: "user",
                     q1: item.q1,
                     q2: item.q2,
@@ -94,7 +98,7 @@ router.route("/register").post(
         res.redirect("/"));
     }
 );
-
+// TO-DO: Suspended accounts should not be able to login and should get a message when they try (or redirect to another page)
 router.route("/login").post(
     async function(req,res){
         console.log(req.body);
@@ -133,9 +137,12 @@ router.route("/home").get(
 );
 
 router.route("/admin").get(
-    function(req,res){
+    async function(req,res){
+        usersFromDb = await user.find()
+
         var model={
-            role: req.session.role
+            role: req.session.role,
+            users : usersFromDb
         }
         if(model.role == "admin"){
             res.render("admin", model);
