@@ -33,7 +33,6 @@ const UserSchema = new Schema({
 const router = express.Router();
 
 const user = mongoose.model("users", UserSchema);
-
 router.route("/").get(
     function (req, res) {
         res.render("index");
@@ -107,7 +106,7 @@ router.route("/login").post(
             password: req.body.password,
         }
         await user.findOne({ username: item.username }, function (err, userObj) {
-            if (userObj != null) {
+            if (userObj != null && userObj.status != 'Suspended') {
                 console.log("--------")
                 console.log(userObj.username)
                 console.log(userObj.role)
@@ -128,6 +127,11 @@ router.route("/login").post(
                     }
                     res.render("index", model);
                 }
+            } else if (userObj.status == 'Suspended') {
+                model = {
+                    message:  "This account is suspended!"
+                }
+                res.render("index", model);
             }
             else {
                 console.log("Username Does Not Exist")
