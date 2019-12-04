@@ -28,8 +28,9 @@ html
                             a(href="/admin/" + user._id)='   Promote'
                     td=user.age
                     td=user.status
-//- that shows a table listing all of the users, their user information and current status (active,  suspended.)
-//- Each user should have a promote or demote link. Clicking promote will make a regular user an admin,
-//- and clicking demote will make an admin user a regular user. The currently logged in admin should NOT be able to demote themselves.
-//- Give the admin user the ability to suspend/activate user accounts. 
+                        if(user.status == 'Active')
+                            a(href="/admin/" + user._id + "/Suspended" )= '   Suspend'
+                        else
+                            a(href="/admin/" + user._id + "/Active")= '   Activate'
+
 //- Suspended accounts should not be able to login and should get a message when they try (or redirect to another page)

@@ -166,9 +166,26 @@ router.route("/admin").get(
         }
     }
 );
+router.route("/admin/:userId/:status").get(
+    async function(req, res){
+        var userId = req.params.userId;
+        var roleChange = req.params.status;
+        var oldUser = await user.findOne({ _id: userId })
+        if (oldUser){
+            if(roleChange){
+                await user.updateOne({ _id: userId }, { $set: { status: roleChange } })
+            }
+            res.redirect("/admin")
+        } else {
+            res.send("Couldn't find user with id: " + userId)
+        }
+    }
+)
 router.route("/admin/:userId").get(
     async function (req, res) {
         var userId = req.params.userId;
+        var roleChange = req.params.status;
+        console.log(roleChange)
         var oldUser = await user.findOne({ _id: userId })
         if (oldUser) {
             if (oldUser.role == 'admin') {
