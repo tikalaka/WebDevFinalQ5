@@ -41,16 +41,16 @@ router.route("/").get(
 
 router.route("/register").get(
     function(req,res){
-        var model = {
-            role: req.session.role
-        }
-        res.render("register", model);
+        // var model = {
+        //     role: req.session.role
+        // }
+        res.render("register");
     }
 )
 
-router.route("/registration").post(
+router.route("/register").post(
     async function(req,res){
-        //create user
+        console.log(req.body)
         var model = {
             role: req.session.role
         }
