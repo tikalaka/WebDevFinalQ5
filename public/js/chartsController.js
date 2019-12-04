@@ -3,7 +3,7 @@ window.onload = function(){
     var ct1 = document.getElementById('userChart1').getContext('2d');
     var ct2 = document.getElementById('userChart2').getContext('2d');
     var ct3 = document.getElementById('userChart3').getContext('2d');
-    var redAmnt =4;
+    var redAmnt=4;
     var blueAmnt=3;
     var yellowAmnt=2;
     var greenAmnt=6;
@@ -17,12 +17,12 @@ window.onload = function(){
     var saladAmnt=1;
 
     var userChart1 = new Chart(ct1, {
-        type: 'bar',
+        type: 'pie',
         data: {
             labels: ['Red', 'Blue', 'Yellow', 'Green'],
             datasets: [{
                 label: '# of People Who Like Theses Colors',
-                data: [redAmnt, blueAmnt, yellowAmnt, greenAmnt],
+                data: [redAmnt,blueAmnt,yellowAmnt,greenAmnt],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -83,7 +83,7 @@ window.onload = function(){
     });
 
     var userChart3 = new Chart(ct3, {
-        type: 'bar',
+        type: 'horizontalBar',
         data: {
             labels: ['Pizza', 'Hamburger', 'Chicken', 'Salad'],
             datasets: [{

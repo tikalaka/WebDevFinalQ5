@@ -21,3 +21,26 @@ th, td {
 .error{
     color: red;
 }
+
+.allCharts{
+    padding: 5%;
+    text-align: center;
+}
+
+.chart1{
+    height: 500px;
+    width: 800px;
+    margin: auto;
+}
+
+.chart2{
+    height: 500px;
+    width: 800px;
+    margin: auto;
+}
+
+.chart3{
+    height: 500px;
+    width: 800px;
+    margin: auto;
+}
