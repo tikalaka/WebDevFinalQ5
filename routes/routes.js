@@ -121,14 +121,17 @@ router.route("/login").post(
                     res.redirect("/home")
                 }
                 else{
-                    console.log("login failed")
-                    res.redirect("/")
+                    console.log("Password is incorrect")
+                    model={
+                        message:"User/Password Incorrect"
+                    }
+                    res.render("index",model);
                 }
             }
             else{
                 console.log("Username Does Not Exist")
                 model={
-                    message:"User Does Not Exist"
+                    message:"User/Password Incorrect"
                 }
                 res.render("index",model);
             }

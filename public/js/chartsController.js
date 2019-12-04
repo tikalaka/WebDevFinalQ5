@@ -1,8 +1,8 @@
 window.onload = function(){
-    var Chart = require('chart.js');
-    var ct1 = document.getElementById('userChart1');
-    var ct2 = document.getElementById('userChart2');
-    var ct3 = document.getElementById('userChart3');
+    console.log("CHARTS AJFLSDGHJDSKJDS")
+    var ct1 = document.getElementById('userChart1').getContext('2d');
+    var ct2 = document.getElementById('userChart2').getContext('2d');
+    var ct3 = document.getElementById('userChart3').getContext('2d');
     var redAmnt =4;
     var blueAmnt=3;
     var yellowAmnt=2;
@@ -15,9 +15,6 @@ window.onload = function(){
     var hamburgerAmnt=23;
     var chickenAmnt=5;
     var saladAmnt=1;
-
-
-
 
     var userChart1 = new Chart(ct1, {
         type: 'bar',
