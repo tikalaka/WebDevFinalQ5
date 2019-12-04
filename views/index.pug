@@ -3,18 +3,17 @@ html
         title='Login to your account'
         link(href='/css/style.css', rel='stylesheet', type='text/css')
     body
-        nav(class='navBar')
-            
-        h1="Login into your account!"
-        if(message)
-            div(class="error")
-                p=model.message
-        form(action="/login", method="POST")
-            div
-                label="Username"
-                input(type="text", name="username")
-            div
-                label="Password"
-                input(type="password", name="password")
-            input(type="submit", value="Login")
-        a(href='/register')='Register an account'
+        h1(class="pageInfoDiv")="Login into your account!"
+        div(class="loginMenu")
+            if(message)
+                div(class="error")
+                    p=model.message
+            form(action="/login", method="POST")
+                div(id="usernameInputDiv")
+                    label(id="logintext")="Username:"
+                    input(type="text", name="username")
+                div(id="passwordInputDiv")
+                    label(id="logintext")="Password:"
+                    input(type="password", name="password")
+                input(type="submit", value="Login", id="loginButton")
+            a(href='/register', id="registerButton")='Register For An Account'

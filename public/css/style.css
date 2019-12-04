@@ -4,6 +4,59 @@
     padding-right: 10px;
 }
 
+.pageInfoDiv{
+    text-align: center;
+    padding-top: 1%;
+}
+
+.loginMenu{
+    text-align: center;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: rgb(223, 219, 219);
+    border-radius: 3%;
+}
+
+#registerButton{
+    font-size: 16pt;
+}
+
+#usernameInputDiv{
+    padding-bottom: 10px;
+}
+
+#loginText{
+    font-size: 16pt;
+    padding-right: 10px;
+}
+
+#loginText2{
+    font-size: 20pt;
+    padding-right: 10px;
+}
+
+#passwordInputDiv{
+    padding-bottom: 15px;
+}
+
+#loginButton{
+    font-size: 20pt;
+    padding: 5px;
+}
+
+.navBarDiv{
+    text-align: center;
+    margin-top: 1%;
+    margin-left: 30%;
+    margin-right: 30%;
+    padding: 10px;
+    border-radius: 2%;
+    background-color: rgb(223, 219, 219);
+}
+
 /* body{
     background-color: rgb(124, 188, 189);
 } */
