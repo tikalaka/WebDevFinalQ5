@@ -141,13 +141,92 @@ router.route("/login").post(
 )
 
 router.route("/home").get(
-    function (req, res) {
+    async function (req, res) {
         var model = {
             role: req.session.role
         }
         res.render("home", model);
     }
 );
+
+router.route("/userdata").get(
+    async function(req,res){
+        usersFromDb = await user.find()
+        // console.log(usersFromDb)
+        var q11 = 0;
+        var q12 = 0;
+        var q13 = 0;
+        var q14 = 0;
+        var q21 = 0;
+        var q22 = 0;
+        var q23 = 0;
+        var q24 = 0;
+        var q31 = 0;
+        var q32 = 0;
+        var q33 = 0;
+        var q34 = 0;
+        usersFromDb.forEach(function(user){
+            console.log("---")
+            console.log(user)
+            console.log("---")
+            console.log(user.q1)
+            if(user.q1=="Yellow"){
+                q11++;
+            }
+            if(user.q1=="Red"){
+                q12++;
+            }
+            if(user.q1=="Blue"){
+                q13++;
+            }
+            if(user.q1=="Green"){
+                q14++;
+            }
+            if(user.q2=="Love it!"){
+                q21++;
+            }
+            if(user.q2=="Hate it!"){
+                q22++;
+            }
+            if(user.q2=="Triangle"){
+                q23++;
+            }
+            if(user.q2=="Not sure..."){
+                q24++;
+            }
+            if(user.q3=="Pizza"){
+                q31++;
+            }
+            if(user.q3=="Hamburger"){
+                q32++;
+            }
+            if(user.q3=="Chicken"){
+                q33++;
+            }
+            if(user.q3=="Salad"){
+                q34++;
+            }
+        })
+        console.log(q11)
+        var model = {
+            q11a: q11,
+            q12a: q12,
+            q13a: q13,
+            q14a: q14,
+            q21a: q21,
+            q22a: q22,
+            q23a: q23,
+            q24a: q24,
+            q31a: q31,
+            q32a: q32,
+            q33a: q33,
+            q34a: q34
+        }
+        console.log(model.q11a)
+    res.send(model);
+})
+
+
 
 router.route("/admin").get(
     async function (req, res) {

@@ -1,20 +1,24 @@
-window.onload = function(){
+window.onload = async function(){
     console.log("CHARTS AJFLSDGHJDSKJDS")
+    const responce = await this.fetch("/userdata");
+    const response = await responce.json();
+    console.log(response);
+    console.log(response.q11a);
     var ct1 = document.getElementById('userChart1').getContext('2d');
     var ct2 = document.getElementById('userChart2').getContext('2d');
     var ct3 = document.getElementById('userChart3').getContext('2d');
-    var redAmnt=4;
-    var blueAmnt=3;
-    var yellowAmnt=2;
-    var greenAmnt=6;
-    var loveItAmnt=1;
-    var hateItAmnt=9;
-    var triangleAmnt=4;
-    var notSureAmnt=7;
-    var pizzaAmnt=10;
-    var hamburgerAmnt=23;
-    var chickenAmnt=5;
-    var saladAmnt=1;
+    var yellowAmnt=response.q11a;
+    var redAmnt=response.q12a;
+    var blueAmnt=response.q13a;
+    var greenAmnt=response.q14a;
+    var loveItAmnt=response.q21a;
+    var hateItAmnt=response.q22a;
+    var triangleAmnt=response.q23a;
+    var notSureAmnt=response.q24a;
+    var pizzaAmnt=response.q31a;
+    var hamburgerAmnt=response.q32a;
+    var chickenAmnt=response.q33a;
+    var saladAmnt=response.q34a;
 
     var userChart1 = new Chart(ct1, {
         type: 'pie',
@@ -22,7 +26,7 @@ window.onload = function(){
             labels: ['Red', 'Blue', 'Yellow', 'Green'],
             datasets: [{
                 label: '# of People Who Like Theses Colors',
-                data: [redAmnt,blueAmnt,yellowAmnt,greenAmnt],
+                data: [yellowAmnt,redAmnt,blueAmnt,greenAmnt],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -50,7 +54,7 @@ window.onload = function(){
     });
 
     var userChart2 = new Chart(ct2, {
-        type: 'bar',
+        type: 'pie',
         data: {
             labels: ['Love It!', 'Hate It!', 'Triangle!', 'Not Sure...'],
             datasets: [{
@@ -83,7 +87,7 @@ window.onload = function(){
     });
 
     var userChart3 = new Chart(ct3, {
-        type: 'horizontalBar',
+        type: 'pie',
         data: {
             labels: ['Pizza', 'Hamburger', 'Chicken', 'Salad'],
             datasets: [{
