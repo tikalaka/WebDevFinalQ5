@@ -1,10 +1,12 @@
-html
+html(class='adminHtml')
     head
         link(href='css/style.css', rel='stylesheet', type='text/css')
-    body
-        h1='Welcome to the admin page!'
-        table
-            caption="Users in database"
+    body(class='adminBody')
+        for user in users
+            if user._id == adminId
+                h1(class='adminWelcome')='Hello ' + user.fullname + "! Welcome to the admin page"
+        table(id="t01")
+            caption(class='adminCaption')="Users in database"
             tr(style='width:100%')
                 th='Fullname'
                 th='Username'
@@ -27,10 +29,14 @@ html
                         td=user.role
                             a(href="/admin/" + user._id)='   Promote'
                     td=user.age
-                    td=user.status
+                    if user._id == adminId
+                        td=user.status
+                    else 
                         if(user.status == 'Active')
-                            a(href="/admin/" + user._id + "/Suspended" )= '   Suspend'
+                            td=user.status
+                                a(href="/admin/" + user._id + "/Suspended" )= '   Suspend'
                         else
-                            a(href="/admin/" + user._id + "/Active")= '   Activate'
+                            td=user.status
+                                a(href="/admin/" + user._id + "/Active")= '   Activate'
 
 //- Suspended accounts should not be able to login and should get a message when they try (or redirect to another page)
