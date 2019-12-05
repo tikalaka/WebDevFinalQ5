@@ -38,7 +38,42 @@ router.route("/").get(
         res.render("index");
     }
 );
-
+router.route("/Logout").get(
+    function(req, res){
+        req.session.username = null;
+        req.session.role = null;
+        req.session._id = null;
+        res.redirect('/')
+    }
+)
+router.route("/userpage").get(
+    async function(req, res){
+        if (req.session._id) {
+            person = await user.findOne({_id : req.session._id})
+            model =  {
+                title : "User page",
+                user : person
+            }
+            res.render("userpage", model)
+        } else {
+            res.redirect("/")
+        }
+    }
+)
+router.route("/profileupdate/:userId").get(
+    async function (req, res){
+        userData = await user.findOne({_id : req.params.userId})
+        model = {
+            user : userData
+        }
+        res.render("profileupdate", model)
+    }
+)
+router.route("/profileupdate").post(
+    function(req, res){
+        
+    }
+)
 router.route("/register").get(
     function (req, res) {
         console.log("SENDING TO ADD USER");
