@@ -203,6 +203,7 @@ router.route("/home").get(
     async function (req, res) {
         var model = {
             role: req.session.role
+            
         }
         res.render("home", model);
     }
