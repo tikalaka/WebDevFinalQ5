@@ -1,6 +1,6 @@
 html
     head
-        link(href='css/style.css', rel='stylesheet', type='text/css')
+        link(href='/css/style.css', rel='stylesheet', type='text/css')
     body
         h1="Update your profile!"
         form(action='/profileupdate', method='Post')
@@ -21,65 +21,43 @@ html
             div(id="usernameInputDiv")
                 label(id="logintext")='Password:'
                 input(type='password', name='newpassword')
-                
             div
                 div
                     span(id="logintext2")="What is the best color of these options?"
                     br
-                    div
-                        input(type='radio', name='question1', value='Yellow' checked)
-                        label(id="logintext")='Yellow'
-                        br
-                    div
-                        input(type='radio', name='question1', value='Red' )
-                        label(id="logintext")='Red'
-                        br
-                    div
-                        input(type='radio', name='question1', value='Blue' )
-                        label(id="logintext")='Blue'
-                        br
-                    div
-                        input(type='radio', name='question1', value='Green' )
-                        label(id="logintext")='Green'
-                        br
+                    for ans in ans1
+                        if user.q1 == ans
+                            input(type='radio', name='question1', value=ans checked)
+                            label(id="logintext")=ans
+                            br
+                        else 
+                            input(type='radio', name='question1', value=ans)
+                            label(id='logintext')=ans
+                            br
             div
                 div
                     span(id="logintext2")='What do you think of the new Tesla truck?'
                     br
-                    div
-                        input(type='radio', name='question2', value='Love it!' checked)
-                        label(id="logintext")='Love it!'
-                        br
-                    div
-                        input(type='radio', name='question2', value='Hate it!' )
-                        label(id="logintext")='Hate it!'
-                        br
-                    div
-                        input(type='radio', name='question2', value='Triangle' )
-                        label(id="logintext")='Triangle'
-                        br
-                    div
-                        input(type='radio', name='question2', value='Not sure' )
-                        label(id="logintext")='Not sure'
-                        br
+                    for ans in ans2
+                        if user.q2 == ans
+                            input(type='radio', name='question2', value=ans checked)
+                            label(id='logintext')=ans
+                            br
+                        else
+                            input(type='radio', name='question2', value=ans)
+                            label(id='logintext')=ans
+                            br
             div
                 div
                     span(id="logintext2")='What is your favorite food?'
                     br
-                    div
-                        input(type='radio', name='question3', value='Pizza' checked)
-                        label(id="logintext")='Pizza'
-                        br
-                    div
-                        input(type='radio', name='question3', value='Hamburger' )
-                        label(id="logintext")='Hamburger'
-                        br
-                    div
-                        input(type='radio', name='question3', value='Chicken' )
-                        label(id="logintext")='Chicken'
-                        br
-                    div
-                        input(type='radio', name='question3', value='Salad' )
-                        label(id="logintext")='Salad'
-                        br
+                    for ans in ans3
+                        if user.q3 == ans
+                            input(type='radio', name='question3', value=ans checked)
+                            label(id='logintext')=ans
+                            br
+                        else
+                            input(type='radio', name='question3', value=ans)
+                            label(id='logintext')=ans
+                            br
             input(type="submit", value="Update Profile!", id="loginButton")

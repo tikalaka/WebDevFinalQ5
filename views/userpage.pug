@@ -1,8 +1,13 @@
 html
     head
         title=title
-        link(href='css/style.css', rel='stylesheet', type='text/css')
+        link(href='/css/style.css', rel='stylesheet', type='text/css')
     body
+        div(class='navBarDiv')
+            nav(class='navBar')
+                a(href="/home")='Home'
+                if role == "admin"
+                    a(id="menuItem" href="/admin") Admin Page
         h1='Welcome to your profile ' + user.fullname
 
         h3="Your full name: " + user.fullname
@@ -20,9 +25,7 @@ html
         //-         label="Your full name: "+user.fullname
         //-         input(type='text', name='fullname')
         //-     input(type='submit', value='Update Profile')
-//- If a user is logged in:
 //- Hide the login link and show the logout link instead
-//- The logout link should destroy the session when clicked
 //- When a user is logged in, show a link to the user's profile in your navigation
 //- On the profile page the user should be able to edit/update their user information,
  including their answers to the questions they answered when they registered.

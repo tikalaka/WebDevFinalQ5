@@ -63,7 +63,10 @@ router.route("/profileupdate/:userId").get(
     async function (req, res) {
         userData = await user.findOne({ _id: req.params.userId })
         model = {
-            user: userData
+            user: userData,
+            ans1: ['Yellow', 'Red', 'Blue', 'Green'],
+            ans2: ['Love it!','Hate it!', 'Triangle', 'Not sure'],
+            ans3: ['Pizza', 'Hamburger', 'Chicken', 'Salad']
         }
         res.render("profileupdate", model)
     }
@@ -155,17 +158,16 @@ router.route("/register").post(
 // TO-DO: Suspended accounts should not be able to login and should get a message when they try (or redirect to another page)
 router.route("/login").post(
     async function (req, res) {
-        console.log(req.body);
         var item = {
             username: req.body.username,
             password: req.body.password,
         }
         await user.findOne({ username: item.username }, function (err, userObj) {
             if (userObj != null && userObj.status != 'Suspended') {
-                console.log("--------")
-                console.log(userObj.username)
-                console.log(userObj.role)
-                console.log("--------")
+                // console.log("--------")
+                // console.log(userObj.username)
+                // console.log(userObj.role)
+                // console.log("--------")
                 var matches = bcrypt.compare(item.password, userObj.password);
                 if (matches) {
                     console.log("login comlpete!")
@@ -173,6 +175,7 @@ router.route("/login").post(
                     req.session.role = userObj.role;
                     req.session._id = userObj._id;
                     console.log(req.session.role);
+                    console.log(req.session._id)
                     res.redirect("/home")
                 }
                 else {
@@ -201,11 +204,14 @@ router.route("/login").post(
 
 router.route("/home").get(
     async function (req, res) {
-        var model = {
-            role: req.session.role
-            
+        if (req.session._id){
+            var model = {
+                role: req.session.role
+            }
+            res.render("home", model);
+        } else {
+            res.redirect("/")
         }
-        res.render("home", model);
     }
 );
 
@@ -285,9 +291,6 @@ router.route("/userdata").get(
         console.log(model.q11a)
         res.send(model);
     })
-
-
-
 router.route("/admin").get(
     async function (req, res) {
         usersFromDb = await user.find()

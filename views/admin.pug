@@ -1,7 +1,10 @@
 html(class='adminHtml')
     head
-        link(href='css/style.css', rel='stylesheet', type='text/css')
+        link(href='/css/style.css', rel='stylesheet', type='text/css')
     body(class='adminBody')
+        div(class="navBarDiv")
+            nav(class='navBar')
+                a(href="/home")="Home"
         for user in users
             if user._id == adminId
                 h1(class='adminWelcome')='Hello ' + user.fullname + "! Welcome to the admin page"
