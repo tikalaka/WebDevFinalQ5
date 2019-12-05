@@ -8,14 +8,17 @@ html
         div(class="navBarDiv")
             nav(class='navBar')
                 a(href="/Logout" id="menuItem")="Logout"
-                a(href='/userpage')="User page"
+                a(href='/userpage' id="menuItem")="User page"
                 if role == "admin"
                     a(id="menuItem" href="/admin") Admin Page
         div(class="allCharts")
+            h3(id="chartName1")
             div(class="chart1")
                 canvas(id="userChart1")
+            h3(id="chartName2")
             div(class="chart2")
                 canvas(id="userChart2")
+            h3(id="chartName3")
             div(class="chart3")
                 canvas(id="userChart3")
         

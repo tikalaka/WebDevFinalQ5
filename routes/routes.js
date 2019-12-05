@@ -178,23 +178,24 @@ router.route("/login").post(
                     console.log(req.session._id)
                     res.redirect("/home")
                 }
-                else {
-                    console.log("Password is incorrect")
+                else if (userObj.status == 'Suspended') {
                     model = {
-                        message: "User/Password Incorrect"
+                        message: "User/Password Incorrect...or you're suspended...not telling you tho!"
                     }
                     res.render("index", model);
                 }
-            } else if (userObj.status == 'Suspended') {
-                model = {
-                    message: "This account is suspended!"
+                else {
+                    console.log("Password is incorrect")
+                    model = {
+                        message: "User/Password Incorrect...or you're suspended...not telling you tho!"
+                    }
+                    res.render("index", model);
                 }
-                res.render("index", model);
-            }
-            else {
+            } 
+            else{
                 console.log("Username Does Not Exist")
                 model = {
-                    message: "User/Password Incorrect"
+                    message: "User/Password Incorrect...or you're suspended...not telling you tho!"
                 }
                 res.render("index", model);
             }

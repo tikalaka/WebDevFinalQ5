@@ -5,41 +5,43 @@ html(class='adminHtml')
         div(class="navBarDiv")
             nav(class='navBar')
                 a(href="/home")="Home"
-        for user in users
-            if user._id == adminId
-                h1(class='adminWelcome')='Hello ' + user.fullname + "! Welcome to the admin page"
-        table(id="t01")
-            caption(class='adminCaption')="Users in database"
-            tr(style='width:100%')
-                th='Fullname'
-                th='Username'
-                th='Email'
-                th='Role'
-                th='Age'
-                th='Status'
+        div(class="adminTableDiv")
             for user in users
-                tr
-                    td=user.fullname
-                    td=user.username
-                    td=user.email
-                    if user.role == 'admin'
-                        if user._id == adminId
-                            td=user.role + "(You)"
-                        else 
-                            td=user.role
-                                a(href="/admin/" + user._id)='   Demote'
-                    else
-                        td=user.role
-                            a(href="/admin/" + user._id)='   Promote'
-                    td=user.age
-                    if user._id == adminId
-                        td=user.status
-                    else 
-                        if(user.status == 'Active')
-                            td=user.status
-                                a(href="/admin/" + user._id + "/Suspended" )= '   Suspend'
+                if user._id == adminId
+                    div(class="adminWelcomeDiv")
+                        h1(class='adminWelcome' align="center")='Hello ' + user.fullname + "! Welcome to the admin page"
+            table(id="t01" align="center")
+                caption(class='adminCaption')="Users in database"
+                tr(style='width:100%')
+                    th='Fullname'
+                    th='Username'
+                    th='Email'
+                    th='Role'
+                    th='Age'
+                    th='Status'
+                for user in users
+                    tr
+                        td=user.fullname
+                        td=user.username
+                        td=user.email
+                        if user.role == 'admin'
+                            if user._id == adminId
+                                td=user.role + "(You)"
+                            else 
+                                td=user.role
+                                    a(href="/admin/" + user._id)='   Demote'
                         else
+                            td=user.role
+                                a(href="/admin/" + user._id)='   Promote'
+                        td=user.age
+                        if user._id == adminId
                             td=user.status
-                                a(href="/admin/" + user._id + "/Active")= '   Activate'
+                        else 
+                            if(user.status == 'Active')
+                                td=user.status
+                                    a(href="/admin/" + user._id + "/Suspended" )= '   Suspend'
+                            else
+                                td=user.status
+                                    a(href="/admin/" + user._id + "/Active")= '   Activate'
 
 //- Suspended accounts should not be able to login and should get a message when they try (or redirect to another page)

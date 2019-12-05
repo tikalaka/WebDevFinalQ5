@@ -5,21 +5,31 @@ html
     body
         div(class='navBarDiv')
             nav(class='navBar')
-                a(href="/home")='Home'
+                a(href="/home" id="menuItem")='Home'
+                a(href="/Logout" id="menuItem")="Logout"
                 if role == "admin"
                     a(id="menuItem" href="/admin") Admin Page
-        h1='Welcome to your profile ' + user.fullname
-
-        h3="Your full name: " + user.fullname
-        h3="Your age: " + user.age
-        h3="Your username: " + user.username
-        h3="Your role: " + user.role
-        h3="Your email: " + user.email
-        h3="Your answer to 'What is the best color of these options?': " +user.q1
-        h3="Your answer to 'What do you think of the new Tesla truck?': " + user.q2
-        h3="Your answer to 'What is your favorite food?': " + user.q3
-
-        a(href='/profileupdate/' + user._id)="Update your profile"
+        div(class="adminWelcomeDiv")
+            h1(class='adminWelcome')='Welcome to your profile, ' + user.fullname
+        div(class="userSettingDiv")
+            div(class="userSetting")
+                h3="Your full name: " + user.fullname
+            div(class="userSetting")
+                h3="Your age: " + user.age
+            div(class="userSetting")
+                h3="Your username: " + user.username
+            div(class="userSetting")
+                h3="Your role: " + user.role
+            div(class="userSetting")
+                h3="Your email: " + user.email
+            div(class="userSetting")
+                h3="Your answer to 'What is the best color of these options?': " +user.q1
+            div(class="userSetting")
+                h3="Your answer to 'What do you think of the new Tesla truck?': " + user.q2
+            div(class="userSetting")
+                h3="Your answer to 'What is your favorite food?': " + user.q3
+            div(id="registerButton")
+                a(href='/profileupdate/' + user._id)="Update your profile"
         //- form(action='/userpage', method='Post')
         //-     div
         //-         label="Your full name: "+user.fullname
@@ -28,5 +38,5 @@ html
 //- Hide the login link and show the logout link instead
 //- When a user is logged in, show a link to the user's profile in your navigation
 //- On the profile page the user should be able to edit/update their user information,
- including their answers to the questions they answered when they registered.
+//- including their answers to the questions they answered when they registered.
 //- Their previous information and choices should be pre-populated in your form when they choose to edit.

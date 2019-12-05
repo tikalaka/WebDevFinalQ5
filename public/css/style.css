@@ -57,6 +57,16 @@
     background-color: rgb(223, 219, 219);
 }
 
+.navBarDiv2{
+    text-align: center;
+    margin-top: 1%;
+    margin-left: 30%;
+    margin-right: 30%;
+    padding: 10px;
+    border-radius: 2%;
+    background-color: rgb(223, 219, 219);
+}
+
 /* body{
     background-color: rgb(124, 188, 189);
 } */
@@ -108,7 +118,7 @@ table#t01 th {
     margin: auto;
 }
 .adminWelcome{
-    background: #443;
+    background: rgb(223, 219, 219);
     padding: 3px;
     text-align: center;
     align-content: center;
@@ -119,15 +129,41 @@ table#t01 th {
     padding-right: 50px
     
 }
-.adminHtml {
-    background : lightblue
+.adminWelcomeDiv{
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.adminTableDiv {
+    text-align: center;
 }
 .adminBody{
     margin: 50px green
 }
 .adminCaption{
-    background: #443;
+    background:  rgb(223, 219, 219);
     border: solid 2px #000;
     font: caption;
     padding: 1px 1px 2px 2px;
+}
+.userSettingDiv{
+    background:  rgb(223, 219, 219);
+    border: solid 2px #000;
+    text-align: center;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding-bottom: 10px;
+}
+.userSetting{
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    align-self: center;
+    display: flex;
+    align-content: center;
 }
