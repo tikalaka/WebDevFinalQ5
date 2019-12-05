@@ -4,6 +4,8 @@ html
     body
         h1="Update your profile!"
         form(action='/profileupdate', method='Post')
+            input(type='hidden', name='userid', value=user._id)
+            input(type='hidden', name='originalpassword' value=user.password)
             div(id="usernameInputDiv")
                 label(id="logintext")="Full name:"
                 input(type='text', name='fullname', value=user.fullname)
@@ -18,7 +20,8 @@ html
                 input(type='number', name='age', value=user.age)
             div(id="usernameInputDiv")
                 label(id="logintext")='Password:'
-                input(type='password', name='password')
+                input(type='password', name='newpassword')
+                
             div
                 div
                     span(id="logintext2")="What is the best color of these options?"

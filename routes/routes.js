@@ -26,7 +26,6 @@ const UserSchema = new Schema({
     q1: String,
     q2: String,
     q3: String
-
 }, { collection: "users" });
 
 
@@ -39,7 +38,7 @@ router.route("/").get(
     }
 );
 router.route("/Logout").get(
-    function(req, res){
+    function (req, res) {
         req.session.username = null;
         req.session.role = null;
         req.session._id = null;
@@ -47,12 +46,12 @@ router.route("/Logout").get(
     }
 )
 router.route("/userpage").get(
-    async function(req, res){
+    async function (req, res) {
         if (req.session._id) {
-            person = await user.findOne({_id : req.session._id})
-            model =  {
-                title : "User page",
-                user : person
+            person = await user.findOne({ _id: req.session._id })
+            model = {
+                title: "User page",
+                user: person
             }
             res.render("userpage", model)
         } else {
@@ -61,17 +60,38 @@ router.route("/userpage").get(
     }
 )
 router.route("/profileupdate/:userId").get(
-    async function (req, res){
-        userData = await user.findOne({_id : req.params.userId})
+    async function (req, res) {
+        userData = await user.findOne({ _id: req.params.userId })
         model = {
-            user : userData
+            user: userData
         }
         res.render("profileupdate", model)
     }
 )
 router.route("/profileupdate").post(
-    function(req, res){
-        
+    async function (req, res) {
+        console.log(req.body)
+        await user.updateOne({ _id: req.body.userid }, {
+            $set: {
+                fullname: req.body.fullname,
+                email: req.body.email,
+                age: req.body.age,
+                username: req.body.username,
+                q1: req.body.question1,
+                q2: req.body.question2,
+                q3: req.body.question3
+            }
+        })
+        if (req.body.newpassword) {
+             bcrypt.hash(req.body.newpassword, 10, async function (err, hash) {
+                await user.updateOne({ _id: req.body.userid }, {
+                    $set: {
+                        password: hash
+                    }
+                })
+            })
+        }
+        res.redirect("/userpage")
     }
 )
 router.route("/register").get(
@@ -164,7 +184,7 @@ router.route("/login").post(
                 }
             } else if (userObj.status == 'Suspended') {
                 model = {
-                    message:  "This account is suspended!"
+                    message: "This account is suspended!"
                 }
                 res.render("index", model);
             }
@@ -189,7 +209,7 @@ router.route("/home").get(
 );
 
 router.route("/userdata").get(
-    async function(req,res){
+    async function (req, res) {
         usersFromDb = await user.find()
         // console.log(usersFromDb)
         var q11 = 0;
@@ -204,45 +224,45 @@ router.route("/userdata").get(
         var q32 = 0;
         var q33 = 0;
         var q34 = 0;
-        usersFromDb.forEach(function(user){
+        usersFromDb.forEach(function (user) {
             console.log("---")
             console.log(user)
             console.log("---")
             console.log(user.q1)
-            if(user.q1=="Yellow"){
+            if (user.q1 == "Yellow") {
                 q11++;
             }
-            if(user.q1=="Red"){
+            if (user.q1 == "Red") {
                 q12++;
             }
-            if(user.q1=="Blue"){
+            if (user.q1 == "Blue") {
                 q13++;
             }
-            if(user.q1=="Green"){
+            if (user.q1 == "Green") {
                 q14++;
             }
-            if(user.q2=="Love it!"){
+            if (user.q2 == "Love it!") {
                 q21++;
             }
-            if(user.q2=="Hate it!"){
+            if (user.q2 == "Hate it!") {
                 q22++;
             }
-            if(user.q2=="Triangle"){
+            if (user.q2 == "Triangle") {
                 q23++;
             }
-            if(user.q2=="Not sure..."){
+            if (user.q2 == "Not sure...") {
                 q24++;
             }
-            if(user.q3=="Pizza"){
+            if (user.q3 == "Pizza") {
                 q31++;
             }
-            if(user.q3=="Hamburger"){
+            if (user.q3 == "Hamburger") {
                 q32++;
             }
-            if(user.q3=="Chicken"){
+            if (user.q3 == "Chicken") {
                 q33++;
             }
-            if(user.q3=="Salad"){
+            if (user.q3 == "Salad") {
                 q34++;
             }
         })
@@ -262,8 +282,8 @@ router.route("/userdata").get(
             q34a: q34
         }
         console.log(model.q11a)
-    res.send(model);
-})
+        res.send(model);
+    })
 
 
 
@@ -272,7 +292,7 @@ router.route("/admin").get(
         usersFromDb = await user.find()
 
         var model = {
-            adminId : req.session._id,
+            adminId: req.session._id,
             role: req.session.role,
             users: usersFromDb
         }
@@ -285,12 +305,12 @@ router.route("/admin").get(
     }
 );
 router.route("/admin/:userId/:status").get(
-    async function(req, res){
+    async function (req, res) {
         var userId = req.params.userId;
         var roleChange = req.params.status;
         var oldUser = await user.findOne({ _id: userId })
-        if (oldUser){
-            if(roleChange){
+        if (oldUser) {
+            if (roleChange) {
                 await user.updateOne({ _id: userId }, { $set: { status: roleChange } })
             }
             res.redirect("/admin")
